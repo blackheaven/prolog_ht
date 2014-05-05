@@ -81,7 +81,7 @@ comettre([(T, D, A)|_]) :-
     aller(D, cuisine, T, Ta),
     T1 is T - Ta,
     aller(cuisine, bibliotheque, T1, Tc),
-    T2 is T1 - Ta,
-    aller(bibliotheque, A, T2, Tr).
+    T2 is T1 - Tc,
+    aller(bibliotheque, A, T2, _).
 
-comettre([(_|XS]) :- comettre(XS).
+comettre([_|XS]) :- comettre(XS).
