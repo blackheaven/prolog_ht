@@ -8,23 +8,8 @@ relie(salleAManger, cuisine).
 relie(office, cuisine).
 relie(office, reserve).
 
-% ?- relie(Y, vestibule).
-
 traverse(X, Y) :- relie(X, Y).
 traverse(X, Y) :- relie(Y, X).
-
-% Un mmeutre à eu lieu dans la bibliothèque
-
-suspect(baronne).
-suspect(servante).
-suspect(militaire).
-suspect(majordome).
-suspect(docteur).
-
-
-% aller(X, X, 0).
-% aller(X, Y) :- traverse(X, Y).
-% aller(X, Y) :- aller(X, Z), traverse(Z, Y).
 
 aller(_, _, M, _) :- M < 0, !, fail.
 aller(X, X, _, 0).
@@ -76,16 +61,6 @@ diff([_], []).
 diff([(T1, P1),(T2, P2)|XS], [(D, P1, P2)|YS]) :-
     D is T2 - T1,
     diff([(T2, P2)|XS], YS).
-
-% Ne marchera pas car on fait tout (récupération de l'arme et meutre dans le même temps)
-% comettre([(T, D, A)|_]) :-
-%     aller(D, cuisine, T, Ta),
-%     T1 is T - Ta,
-%     aller(cuisine, bibliotheque, T1, Tc),
-%     T2 is T1 - Tc,
-%     aller(bibliotheque, A, T2, _).
-
-% comettre([_|XS]) :- comettre(XS).
 
 comettre([(T, D, A)|XS], non_armé) :-
     aller(D, cuisine, T, Ta),
