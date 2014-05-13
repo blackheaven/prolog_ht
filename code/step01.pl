@@ -8,4 +8,9 @@ relie(salleAManger, cuisine).
 relie(office, cuisine).
 relie(office, reserve).
 
-% traverse(cuisine, office).
+traverse(X, Y) :- relie(X, Y).
+traverse(X, Y) :- relie(Y, X).
+
+main :-
+    aller(office, vestibule),
+    print('On peut aller de l\'office au vestibule'), nl.

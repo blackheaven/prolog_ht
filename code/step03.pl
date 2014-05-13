@@ -15,6 +15,7 @@ aller(_, _, M, _) :- M < 0, !, fail.
 aller(X, X, _, 0).
 aller(X, Y, M, N) :- L is M - 1, aller(X, Z, L, D), traverse(Z, Y), N is D+1.
 
+:- dynamic position/3 .
 position(0, baronne, salon).
 position(0, servante, salon).
 position(0, militaire, salon).
@@ -63,6 +64,21 @@ diff([(T1, P1),(T2, P2)|XS], [(D, P1, P2)|YS]) :-
     diff([(T2, P2)|XS], YS).
 
 comettre([(T, D, A)|XS]) :- % TODO
-    fail.
+    .
 
 comettre([_|XS]) :- !, comettre(XS).
+
+main :-
+    bagof(X, comettre_meutre(X), Xs),
+    write(Xs), nl, halt.
+
+main :-
+    write('Et avec 15 en dernière position'), nl,
+    setof(S, position(9, S, salleAManger), Ss),
+    retractall( position(9, _, salleAManger) ),
+    addAll(Ss),
+    setof(X, comettre_meutre(X), Xs),
+    write(Xs), nl.
+
+addAll(List) :- member(X, List), assertz( position(15, X, salleAManger) ), fail.
+addAll(_).

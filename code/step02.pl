@@ -11,4 +11,10 @@ relie(office, reserve).
 traverse(X, Y) :- relie(X, Y).
 traverse(X, Y) :- relie(Y, X).
 
-% aller(office, vestibule).
+
+aller(X, X).
+aller(X, Y) :- traverse(X, Z), aller(Z, Y).
+
+main :-
+    aller(office, vestibule),
+    print('On peut aller de l\'office au vestibule'), nl.

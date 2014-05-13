@@ -79,3 +79,7 @@ comettre([(T, D, A)|_], armé) :-
     aller(bibliotheque, A, Tr, _).
 
 comettre([_|XS], A) :- !, comettre(XS, A).
+
+main :-
+    setof(X, comettre_meutre(X), Xs),
+    write(Xs), nl, halt.

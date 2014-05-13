@@ -70,3 +70,7 @@ comettre([(T, D, A)|_]) :-
     aller(bibliotheque, A, Trc, _).
 
 comettre([_|XS]) :- !, comettre(XS).
+
+main :-
+    bagof(X, comettre_meutre(X), Xs),
+    write(Xs), nl, halt.
